@@ -1,0 +1,35 @@
+Codepen.io
+Babelj.io
+Add babel as js preprocessor
+Add react and reactdom js files and ready to go
+
+Getting started:
+npm install -g create-react-app
+create-react-app my-app
+
+From <https://reactjs.org/tutorial/tutorial.html> 
+
+cd my-app
+npm start
+Now if you run npm start in the project folder and open http://localhost:3000 in the browser,
+
+From <https://reactjs.org/tutorial/tutorial.html> 
+
+
+
+components:
+-navbar
+-main area etc
+
+can be made in files and modules
+
+------
+props
+communicate between components
+
+-----
+state
+life cycle
+
+--------------
+
