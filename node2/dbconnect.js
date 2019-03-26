@@ -4,18 +4,18 @@ const MongoClient = mongodb.MongoClient
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
 
-// MongoClient.connect(connectionURL,{useNewUrlParser:true},(error,client)=>{
-//     if(error)
-//         return console.log('error');
-//     console.log('connected');
-//     const db = client.db(databaseName);
-// })
+MongoClient.connect(connectionURL,{useNewUrlParser:true},(error,client)=>{
+    if(error)
+        return console.log('error');
+    console.log('connected');
+    const db = client.db(databaseName);
 
+    var myobj = { name: "Company Inc", address: "Highway 37" };
+  db.collection("customers").insertOne(myobj, function(err, res) {
+    if (err) throw err;
+    console.log("1 document inserted");
+    client.close();
+  });
 
-const express = require('express')
-const app = express()
-const port = 3000
+})
 
-app.get('/', (req, res) => res.send('Hello World!'))
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
