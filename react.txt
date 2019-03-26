@@ -33,5 +33,4 @@ life cycle
 
 --------------
 
-npm install axios --save
 

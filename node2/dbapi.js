@@ -1,7 +1,10 @@
+var cors = require('cors')
 
 const express = require('express')
 const app = express()
-const port = 3000
+app.use(cors())
+
+const port = 3001
 const mongodb = require('mongodb')
 const MongoClient = mongodb.MongoClient
 
@@ -16,10 +19,11 @@ app.get('/', (req, res) => {
     
     MongoClient.connect(url, function(err, db) {
       if (err) throw err;
-      var dbo = db.db("task-manager");
+      var dbo = db.db("mydb");
       var query = { address: "Highway 37" };
-      dbo.collection("customers").find(query).toArray(function(err, result) {
-        if (err) throw err;
+//    dbo.collection("customers").find(query).toArray(function(err, result) {
+      dbo.collection("customers").find({}).toArray(function(err, result) {
+          if (err) throw err;
         //obj=result;
         res.send(result);
         console.log(result);
