@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 import axios from 'axios';
 class Customer extends Component {
   
@@ -9,7 +7,7 @@ class Customer extends Component {
     return (
       <div>
           <h1>List of Customers</h1>
-      <table>
+      <table >
           <thead>
           <tr>
               <th>Name</th>
