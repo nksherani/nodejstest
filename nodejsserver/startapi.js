@@ -63,11 +63,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/AddCustomer', (req, res,next) => {
   console.log(req.body);
   console.log(res);
-  db.collection("customers").insertOne(req.body, function(err, res) {
+
+
+  MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-    console.log("1 document inserted");
-    client.close();
+    var dbo = db.db("mydb");
+    var query = { address: "Highway 37" };
+    db.collection("customers1").insertOne(req.body, function(err, res) {
+      if (err) throw err;
+      console.log("1 document inserted");
+      client.close();
+    });
   });
+
+
+  // db.collection("customers").insertOne(req.body, function(err, res) {
+  //   if (err) throw err;
+  //   console.log("1 document inserted");
+  //   client.close();
+  // });
 
 });///post ends
 
