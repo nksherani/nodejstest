@@ -2,12 +2,34 @@ import React, { Component } from 'react';
 import axios from 'axios'
 
 
-class Add extends React.Component {
+class Edit extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {ID: '',Name:'',Address:'',City:'',State:'',ZIP:'',ContactFirst:'',ContactLast:'',Phone:''};
+      this.state = {_id:'',ID: '',Name:'',Address:'',City:'',State:'',ZIP:'',ContactFirst:'',ContactLast:'',Phone:''};
+      //console.log(this.props.match.params.id);
     }
-  
+    componentDidMount(){
+        this.GetCustomer();
+      }
+      GetCustomer=()=>{
+
+        var url = `http://localhost:3001/GetCustomer/`+this.props.match.params.id;
+        axios.get(url)
+        .then(res => {
+          const customer = res.data;
+          this.setState({ _id: customer._id });
+          this.setState({ ID: customer.ID });
+          this.setState({ Name: customer.Name });
+          this.setState({ Address: customer.Address });
+          this.setState({ City: customer.City });
+          this.setState({ State: customer.State });
+          this.setState({ ZIP: customer.ZIP });
+          this.setState({ ContactFirst: customer.ContactFirst });
+          this.setState({ ContactLast: customer.ContactLast });
+          this.setState({ Phone: customer.Phone });
+        });
+        
+      }
     handleChange=(event)=> {
             if(event.target.id==="ID")
             this.setState({ID: event.target.value});
@@ -32,16 +54,8 @@ class Add extends React.Component {
   
 
     handleSubmit=(event)=> {
-        var data1= {
-            firstName: 'Fred',
-            lastName: 'Flintstone'
-          };
         
-        // let axiosConfig = {
-        //     headers: {
-        //         'Content-Type': 'application/json; charset=utf-8'     }
-        //   };
-        axios.post('http://localhost:3001/AddCustomer', this.state)
+        axios.post('http://localhost:3001/EditCustomer', this.state)
 
             .then((response) => {
                 console.log(response);
@@ -50,7 +64,7 @@ class Add extends React.Component {
                 console.log(error);
             })
         
-      console.log('A form was submitted: ' + JSON.stringify( this.state));
+      console.log('Customer Data Updated: ' + JSON.stringify( this.state));
       event.preventDefault();
     }
   
@@ -59,6 +73,10 @@ class Add extends React.Component {
         <form onSubmit={this.handleSubmit}>
         <table>
             <tbody>
+                <tr hidden>
+                    <th>ObjectId</th>
+                    <td><input type="text" id='_id' value={this.state._id} onChange={this.handleChange} /></td>
+                </tr>
                 <tr>
                     <th>ID</th>
                     <td><input type="text" id='ID' value={this.state.ID} onChange={this.handleChange} /></td>
@@ -95,6 +113,7 @@ class Add extends React.Component {
                     <th>Phone</th>
                     <td><input type="text" id='Phone' value={this.state.Phone} onChange={this.handleChange} /></td>
                 </tr>
+                
             </tbody>
         </table>
          
@@ -104,4 +123,4 @@ class Add extends React.Component {
     }
   }
 
-  export default Add;
+  export default Edit;

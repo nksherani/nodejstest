@@ -10,44 +10,27 @@ app.use(function(req, res, next) {
   next();
 });
 
-// Add headers
-// app.use(function (req, res, next) {
-
-//   // Website you wish to allow to connect
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-
-//   // Request methods you wish to allow
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-//   // Request headers you wish to allow
-//   //res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-//   // Set to true if you need the website to include cookies in the requests sent
-//   // to the API (e.g. in case you use sessions)
-//   //res.setHeader('Access-Control-Allow-Credentials', true);
-
-//   // Pass to next layer of middleware
-//   next();
-// });
 
 const port = 3001
 const mongodb = require('mongodb')
 const MongoClient = mongodb.MongoClient
+const url = "mongodb://localhost:27017/";
+const querystring = require('querystring');  
 
+var bodyParser = require('body-parser')
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+var ObjectId = require('mongodb').ObjectID;
 
 
 app.get('/GetCustomers', (req, res) => {
 
-    //var obj;
-
-    var MongoClient = require('mongodb').MongoClient;
-    var url = "mongodb://localhost:27017/";
-    
     MongoClient.connect(url, function(err, db) {
       if (err) throw err;
       var dbo = db.db("mydb");
-      var query = { address: "Highway 37" };
-      dbo.collection("customers").find({}).toArray(function(err, result) {
+      //var query = { address: "Highway 37" };
+      dbo.collection("customers1").find({}).toArray(function(err, result) {
           if (err) throw err;
         res.send(result);
         console.log(result);
@@ -55,38 +38,68 @@ app.get('/GetCustomers', (req, res) => {
       });
     });
 });
-var bodyParser = require('body-parser')
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-///post
-app.post('/AddCustomer', (req, res,next) => {
-  console.log(req.body);
-  console.log(res);
 
+app.get('/GetCustomer/:id', (req, res) => {
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("mydb");
-    var query = { address: "Highway 37" };
-    db.collection("customers1").insertOne(req.body, function(err, res) {
+    let id = req.params.id;
+
+    console.log(id);
+
+    dbo.collection("customers1").findOne({"_id": new ObjectId(id)}, function(err, doc) {
+      res.send(doc);
+      console.log(doc);
+      db.close();
+   });
+
+    
+  });
+});
+
+
+
+///post
+app.post('/AddCustomer', (req, res,next) => {
+  console.log(req.body);
+
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("mydb");
+    dbo.collection("customers1").insertOne(req.body, function(err, res) {
       if (err) throw err;
       console.log("1 document inserted");
-      client.close();
+      db.close();
     });
   });
-
-
-  // db.collection("customers").insertOne(req.body, function(err, res) {
-  //   if (err) throw err;
-  //   console.log("1 document inserted");
-  //   client.close();
-  // });
 
 });///post ends
 
 
+///post
+app.post('/EditCustomer', (req, res,next) => {
+  console.log(req.body);
 
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    
+    
+    var dbo = db.db("mydb");
+    var myquery = { _id: req.body._id };
+
+    dbo.collection("customers1").updateOne(myquery,req.body, function(err, res) {
+      if (err) throw err;
+      console.log("1 document updated");
+      db.close();
+    });
+
+
+
+  });
+
+});///post ends
 
 
 

@@ -1,6 +1,7 @@
 import React from 'react';
  import { Route, Link } from 'react-router-dom';
  import Add from './Customers/Add';
+ import Edit from './Customers/Edit';
  import Index from './Customers/Index';
 class NavMenu extends React.Component {
     render() {
@@ -13,6 +14,7 @@ class NavMenu extends React.Component {
 
                 <Route path="/" exact component={Index}/>
                 <Route path="/Customers/Add" component={Add}/>
+                <Route path="/Customers/Edit/:id" component={Edit}/>
             </div>
         );
     }
