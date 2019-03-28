@@ -36,21 +36,45 @@ class Add extends React.Component {
   
 
     handleSubmit=(event)=> {
+        var data1= {
+            firstName: 'Fred',
+            lastName: 'Flintstone'
+          };
         
-        axios({
-            method: 'post',
-            url: 'localhost:3001/AddCustomer',
-            data: this.state,
-            config: { headers: {'Content-Type': 'application/json' }}
-            })
-            .then(function (response) {
-                //handle success
+        // let axiosConfig = {
+        //     headers: {
+        //         'Content-Type': 'application/json; charset=utf-8'     }
+        //   };
+        axios.post('http://localhost:3001/AddCustomer', this.state)
+
+            .then((response) => {
                 console.log(response);
             })
-            .catch(function (response) {
-                //handle error
-                console.log(response);
-            });
+            .catch((error) => {
+                console.log(error);
+            })
+        
+        // axios({
+        //     method: 'post',
+        //     url: 'http://localhost:3001/AddCustomer',
+        //     //data: this.state.Name,
+        //     data: {
+        //         firstName: 'Fred',
+        //         lastName: 'Flintstone'
+        //       },
+        //     config: { headers: {'Content-Type': 'application/json; charset=utf-8',
+        //     "Access-Control-Allow-Origin": "*",
+        //     "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        //     "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token" }}
+        //     })
+        //     .then(function (response) {
+        //         //handle success
+        //         console.log(response);
+        //     })
+        //     .catch(function (response) {
+        //         //handle error
+        //         console.log(response);
+        //     });
 
       console.log('A form was submitted: ' + JSON.stringify( this.state));
       event.preventDefault();

@@ -6,7 +6,7 @@ const app = express()
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
@@ -47,25 +47,27 @@ app.get('/GetCustomers', (req, res) => {
       if (err) throw err;
       var dbo = db.db("mydb");
       var query = { address: "Highway 37" };
-//    dbo.collection("customers").find(query).toArray(function(err, result) {
       dbo.collection("customers").find({}).toArray(function(err, result) {
           if (err) throw err;
-        //obj=result;
         res.send(result);
         console.log(result);
         db.close();
       });
     });
 });
+var bodyParser = require('body-parser')
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 ///post
 app.post('/AddCustomer', (req, res,next) => {
   console.log(req.body);
-  // db.collection("customers").insertOne(myobj, function(err, res) {
-  //   if (err) throw err;
-  //   console.log("1 document inserted");
-  //   client.close();
-  // });
+  console.log(res);
+  db.collection("customers").insertOne(req.body, function(err, res) {
+    if (err) throw err;
+    console.log("1 document inserted");
+    client.close();
+  });
 
 });///post ends
 
