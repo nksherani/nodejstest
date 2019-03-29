@@ -80,16 +80,28 @@ app.post('/AddCustomer', (req, res,next) => {
 
 ///post
 app.post('/EditCustomer', (req, res,next) => {
-  console.log(req.body);
+  //console.log(req.body);
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     
     
     var dbo = db.db("mydb");
-    var myquery = { _id: req.body._id };
+    let tempid = new ObjectId(req.body._id);
+    console.log(tempid);
+    var myquery = { _id:  tempid};
+    var tempObj;
+   
+  //   dbo.collection("customers1").findOne({"_id": new ObjectId(id)}, function(err, doc) {
+  //     res.send(doc);
+  //     console.log(doc);
+  //     db.close();
+  //  });
 
-    dbo.collection("customers1").updateOne(myquery,req.body, function(err, res) {
+    dbo.collection("customers1").updateOne(myquery,{
+      $set: req.body,
+      $currentDate: { lastModified: true }
+    }, function(err, res) {
       if (err) throw err;
       console.log("1 document updated");
       db.close();

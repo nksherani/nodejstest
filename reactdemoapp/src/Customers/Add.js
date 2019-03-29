@@ -51,7 +51,9 @@ class Add extends React.Component {
             })
         
       console.log('A form was submitted: ' + JSON.stringify( this.state));
+      
       event.preventDefault();
+      window.location='/';
     }
   
     render() {
