@@ -10,7 +10,7 @@ class NavMenu extends React.Component {
         <Router>
         <div>
           <h2>Welcome to React Router Tutorial</h2>
-          <nav className="navbar navbar-default navbar-expand-lg navbar-light bg-light">
+          <nav className="navbar navbar-default navbar-expand-lg">
           <ul className="navbar-nav mr-auto">
             <li><Link to={'/'} className="nav-link"> Index </Link></li>
             <li><Link to={'/Customers/Add'} className="nav-link">Add</Link></li>

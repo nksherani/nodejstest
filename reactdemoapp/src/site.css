@@ -21,10 +21,15 @@
   color: white;
 }
 
-.navbar-default{
+ .navbar-default{
   background-color: #4CAF50;
-  color: blue;
+  font-size: 18px;
+  color: #ddd;
 }
-
+.nav-link ,.nav-link:hover{
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+}
 
 

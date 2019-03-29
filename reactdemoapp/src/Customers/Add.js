@@ -61,7 +61,7 @@ class Add extends React.Component {
         <form onSubmit={this.handleSubmit}>
         <table>
             <tbody>
-                <tr>
+                <tr >
                     <th>ID</th>
                     <td><input type="text" id='ID' value={this.state.ID} onChange={this.handleChange} /></td>
                 </tr>
