@@ -9,7 +9,7 @@ class NavMenu extends React.Component {
         return (
         <Router>
         <div>
-          <h2>Welcome to React Router Tutorial</h2>
+          <h2>Welcome to Customer Portal</h2>
           <nav className="navbar navbar-default navbar-expand-lg">
           <ul className="navbar-nav mr-auto">
             <li><Link to={'/'} className="nav-link"> Index </Link></li>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import PhoneInput from 'react-phone-number-input'
 
 
 class Add extends React.Component {
@@ -58,48 +59,44 @@ class Add extends React.Component {
   
     render() {
       return (
-        <form onSubmit={this.handleSubmit}>
-        <table>
-            <tbody>
-                <tr >
-                    <th>ID</th>
-                    <td><input type="text" id='ID' value={this.state.ID} onChange={this.handleChange} /></td>
-                </tr>
-                <tr>
-                    <th>Name</th>
-                    <td><input type="text" id='Name' value={this.state.Name} onChange={this.handleChange} /></td>
-                </tr>
-                <tr>
-                    <th>Address</th>
-                    <td><input type="text" id='Address' value={this.state.Address} onChange={this.handleChange} /></td>
-                </tr>
-                <tr>
-                    <th>City</th>
-                    <td><input type="text" id='City' value={this.state.City} onChange={this.handleChange} /></td>
-                </tr>
-                <tr>
-                    <th>State</th>
-                    <td><input type="text" id='State' value={this.state.State} onChange={this.handleChange} /></td>
-                </tr>
-                <tr>
-                    <th>ZIP</th>
-                    <td><input type="text" id='ZIP' value={this.state.ZIP} onChange={this.handleChange} /></td>
-                </tr>
-                <tr>
-                    <th>ContactFirst</th>
-                    <td><input type="text" id='ContactFirst' value={this.state.ContactFirst} onChange={this.handleChange} /></td>
-                </tr>
-                <tr>
-                    <th>ContactLast</th>
-                    <td><input type="text" id='ContactLast' value={this.state.ContactLast} onChange={this.handleChange} /></td>
-                </tr>
-                <tr>
-                    <th>Phone</th>
-                    <td><input type="text" id='Phone' value={this.state.Phone} onChange={this.handleChange} /></td>
-                </tr>
-            </tbody>
-        </table>
-         
+    <form onSubmit={this.handleSubmit}>
+        <div className="form-group">
+            <label >ID:</label>
+            <input type="text" id='ID' value={this.state.ID} onChange={this.handleChange} className="form-control" />
+        </div>
+        <div className="form-group">
+            <label >Name:</label>
+            <input type="text" id='Name' value={this.state.Name} onChange={this.handleChange} className="form-control" />
+        </div>
+        <div className="form-group">
+            <label >Address:</label>
+            <input type="text" id='Address' value={this.state.Address} onChange={this.handleChange} className="form-control" />
+        </div>
+        <div className="form-group">
+            <label >City:</label>
+            <input type="text" id='City' value={this.state.City} onChange={this.handleChange} className="form-control" />
+        </div>
+        <div className="form-group">
+            <label >State:</label>
+            <input type="text" id='State' value={this.state.State} onChange={this.handleChange} className="form-control" />
+        </div>
+        <div className="form-group">
+            <label >ZIP:</label>
+            <input type="text" id='ZIP' value={this.state.ZIP} onChange={this.handleChange} className="form-control" />
+        </div>
+        <div className="form-group">
+            <label >ContactFirst:</label>
+            <input type="text" id='ContactFirst' value={this.state.ContactFirst} onChange={this.handleChange} className="form-control" />
+        </div>
+        <div className="form-group">
+            <label >ContactLast:</label>
+            <input type="text" id='ContactLast' value={this.state.ContactLast} onChange={this.handleChange} className="form-control" />
+        </div>
+        <div className="form-group">
+            <label >Phone:</label>
+            {/* <input type="text" id='Phone' value={this.state.Phone} onChange={this.handleChange} className="form-control" /> */}
+            <PhoneInput    placeholder="Enter phone number" className="form-control"   value={ this.state.Phone } onChange={ Phone => this.setState({ Phone }) } />
+        </div>
           <input type="submit" value="Submit" />
         </form>
       );

@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 //import './index.css';
 import './site.css'
+import 'react-phone-number-input/style.css'
+
 
  import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router} from "react-router-dom";
