@@ -97,11 +97,9 @@ app.post('/EditCustomer', (req, res,next) => {
   //     console.log(doc);
   //     db.close();
   //  });
-
-    dbo.collection("customers1").updateOne(myquery,{
-      $set: req.body,
-      $currentDate: { lastModified: true }
-    }, function(err, res) {
+    tempObj = req.body;
+    delete tempObj._id;
+    dbo.collection("customers1").updateOne(myquery,{$set: req.body}, function(err, res) {
       if (err) throw err;
       console.log("1 document updated");
       db.close();

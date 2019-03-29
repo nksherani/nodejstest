@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import  Customer from './Customer'
+import './site.css'
+
 class Index extends Component {
   state = {
     customers: []

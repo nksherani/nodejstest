@@ -20,7 +20,7 @@ class Customer extends Component {
     return (
       <div>
           <h1>List of Customers</h1>
-      <table >
+      <table id='customers' >
           <thead>
           <tr>
               <th>ID</th>

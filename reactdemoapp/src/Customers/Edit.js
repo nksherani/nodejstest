@@ -66,6 +66,8 @@ class Edit extends React.Component {
         
       console.log('Customer Data Updated: ' + JSON.stringify( this.state));
       event.preventDefault();
+      window.location='/';
+
     }
   
     render() {
